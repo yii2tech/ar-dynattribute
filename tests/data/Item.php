@@ -9,6 +9,9 @@ use yii2tech\ar\dynattribute\DynamicAttributeBehavior;
  * @property integer $id
  * @property string $name
  * @property string $data
+ *
+ * @property boolean $hasComment
+ * @property integer $commentCount
  */
 class Item extends ActiveRecord
 {
@@ -20,6 +23,11 @@ class Item extends ActiveRecord
         return [
             'dynamicAttribute' => [
                 'class' => DynamicAttributeBehavior::className(),
+                'sourceAttribute' => 'data',
+                'dynamicAttributeDefaults' => [
+                    'hasComment' => false,
+                    'commentCount' => 0,
+                ],
             ],
         ];
     }
@@ -39,7 +47,14 @@ class Item extends ActiveRecord
     {
         return [
             ['name', 'required'],
-            ['groupIds', 'safe'],
         ];
+    }
+
+    /**
+     * @return DynamicAttributeBehavior dynamic attribute behavior instance.
+     */
+    public function getDynamicAttributeBehavior()
+    {
+        return $this->getBehavior('dynamicAttribute');
     }
 }
