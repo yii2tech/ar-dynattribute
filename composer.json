@@ -1,0 +1,30 @@
+{
+    "name": "yii2tech/ar-dynattribute",
+    "description": "Provides dynamic ActiveRecord attributes stored into the single field in serialized state",
+    "keywords": ["yii2", "active", "record", "dynamic", "attributes"],
+    "type": "yii2-extension",
+    "license": "BSD-3-Clause",
+    "support": {
+        "issues": "https://github.com/yii2tech/ar-dynattribute/issues",
+        "forum": "http://www.yiiframework.com/forum/",
+        "wiki": "https://github.com/yii2tech/ar-dynattribute/wiki",
+        "source": "https://github.com/yii2tech/ar-dynattribute"
+    },
+    "authors": [
+        {
+            "name": "Paul Klimov",
+            "email": "klimov.paul@gmail.com"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*"
+    },
+    "autoload": {
+        "psr-4": { "yii2tech\\ar\\dynattribute\\": "" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
+}
