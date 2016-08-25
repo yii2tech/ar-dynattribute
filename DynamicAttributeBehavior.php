@@ -14,7 +14,41 @@ use yii\db\BaseActiveRecord;
 use yii\di\Instance;
 
 /**
- * DynamicAttributeBehavior
+ * DynamicAttributeBehavior provides support for ActiveRecord dynamic attributes. Such attributes
+ * are stored into a single field in serialized state, while can be accessed and processed as
+ * a regular model attributes.
+ *
+ * For example:
+ *
+ * ```php
+ * use yii\db\ActiveRecord;
+ * use yii2tech\ar\dynattribute\DynamicAttributeBehavior;
+ *
+ * class User extends ActiveRecord
+ * {
+ *     public function behaviors()
+ *     {
+ *         return [
+ *             'dynamicAttribute' => [
+ *                 'class' => DynamicAttributeBehavior::className(),
+ *                 'sourceAttribute' => 'viewParams', // field to store serialized attributes
+ *                 'dynamicAttributeDefaults' => [ // default values for the dynamic attributes
+ *                     'bgColor' => 'green',
+ *                     'showSidebar' => true,
+ *                 ],
+ *             ],
+ *         ];
+ *     }
+ *
+ *     // ...
+ * }
+ *
+ * $model = new User();
+ * $model->bgColor = 'red';
+ * $model->showSidebar = false;
+ * $model->save(); // 'bgColor' and 'showSidebar' are serialized and stored at 'viewParams'
+ * echo $model->viewParams; // outputs: '{"bgColor": "red", "showSidebar": false}'
+ * ```
  *
  * @property BaseActiveRecord $owner
  * @property string|array|SerializerInterface $serializer serializer instance or its configuration.
