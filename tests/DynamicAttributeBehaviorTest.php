@@ -63,6 +63,27 @@ class DynamicAttributeBehaviorTest extends TestCase
     }
 
     /**
+     * @depends testSetupDynamicAttributes
+     */
+    public function testNullDefaultValue()
+    {
+        $model = new Item();
+        $behavior = $model->getDynamicAttributeBehavior();
+        $behavior->dynamicAttributeDefaults = [
+            'commentCount' => null,
+        ];
+        $this->assertNull($model->commentCount);
+
+        $model = new Item();
+        $behavior = $model->getDynamicAttributeBehavior();
+        $behavior->dynamicAttributeDefaults = [
+            'commentCount' => null,
+        ];
+        $model->commentCount = 15;
+        $this->assertEquals(15, $model->commentCount);
+    }
+
+    /**
      * @depends testSetupSerializer
      * @depends testSetupDynamicAttributes
      */

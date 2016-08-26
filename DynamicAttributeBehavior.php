@@ -360,7 +360,7 @@ class DynamicAttributeBehavior extends Behavior
             return true;
         }
         $attributes = $this->getDynamicAttributes();
-        return isset($attributes[$name]);
+        return array_key_exists($name, $attributes);
     }
 
     /**
@@ -372,7 +372,7 @@ class DynamicAttributeBehavior extends Behavior
             return true;
         }
         $attributes = $this->getDynamicAttributes();
-        return $this->allowRandomDynamicAttribute || isset($attributes[$name]);
+        return $this->allowRandomDynamicAttribute || array_key_exists($name, $attributes);
     }
 
     // Events :
