@@ -23,7 +23,7 @@ class Item extends ActiveRecord
         return [
             'dynamicAttribute' => [
                 'class' => DynamicAttributeBehavior::className(),
-                'sourceAttribute' => 'data',
+                'storageAttribute' => 'data',
                 'dynamicAttributeDefaults' => [
                     'hasComment' => false,
                     'commentCount' => 0,

@@ -85,7 +85,7 @@ class User extends ActiveRecord
         return [
             'dynamicAttribute' => [
                 'class' => DynamicAttributeBehavior::className(),
-                'sourceAttribute' => 'viewParams', // field to store serialized attributes
+                'storageAttribute' => 'viewParams', // field to store serialized attributes
                 'dynamicAttributeDefaults' => [ // default values for the dynamic attributes
                     'bgColor' => 'green',
                     'showSidebar' => true,
@@ -144,7 +144,7 @@ class User extends ActiveRecord
         return [
             'dynamicAttribute' => [
                 'class' => DynamicAttributeBehavior::className(),
-                'sourceAttribute' => 'viewParams',
+                'storageAttribute' => 'viewParams',
                 'dynamicAttributeDefaults' => [
                     'bgColor' => 'green',
                     'showSidebar' => true,

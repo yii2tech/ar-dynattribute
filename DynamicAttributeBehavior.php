@@ -31,7 +31,7 @@ use yii\di\Instance;
  *         return [
  *             'dynamicAttribute' => [
  *                 'class' => DynamicAttributeBehavior::className(),
- *                 'sourceAttribute' => 'viewParams', // field to store serialized attributes
+ *                 'storageAttribute' => 'viewParams', // field to store serialized attributes
  *                 'dynamicAttributeDefaults' => [ // default values for the dynamic attributes
  *                     'bgColor' => 'green',
  *                     'showSidebar' => true,
@@ -63,7 +63,7 @@ class DynamicAttributeBehavior extends Behavior
     /**
      * @var string name of the owner attribute, which stores serialized dynamic attribute values.
      */
-    public $sourceAttribute = 'data';
+    public $storageAttribute = 'data';
     /**
      * @var array list of dynamic attribute default values.
      *
@@ -118,7 +118,7 @@ class DynamicAttributeBehavior extends Behavior
     public function getDynamicAttributes()
     {
         if ($this->_dynamicAttributes === null) {
-            $this->_dynamicAttributes = $this->unserializeAttributes($this->owner->{$this->sourceAttribute});
+            $this->_dynamicAttributes = $this->unserializeAttributes($this->owner->{$this->storageAttribute});
             if (!empty($this->dynamicAttributeDefaults)) {
                 $this->_dynamicAttributes = array_merge($this->dynamicAttributeDefaults, $this->_dynamicAttributes);
             }
@@ -380,6 +380,6 @@ class DynamicAttributeBehavior extends Behavior
         $attributes = $this->getDynamicAttributes();
         $data = $this->serializeAttributes($attributes);
 
-        $this->owner->{$this->sourceAttribute} = $data;
+        $this->owner->{$this->storageAttribute} = $data;
     }
 }
