@@ -166,6 +166,9 @@ echo $oldModel->viewParams; // outputs: '{"bgColor": "red", "showSidebar": false
 echo $oldModel->fontColor; // outputs: 'black'
 ```
 
+> Note: you may exclude dynamic attribute, which value equals the default one, from saving disabling
+  [[\yii2tech\ar\dynattribute\DynamicAttributeBehavior::saveDynamicAttributeDefaults]] option.
+
 
 ## Restrict dynamic attribute list <span id="restrict-dynamic-attribute-list"></span>
 
@@ -190,6 +193,11 @@ at `dynamicAttributeDefaults`.
 
 > Note: you can also use [[\yii2tech\ar\dynattribute\DynamicAttributeBehavior::setDynamicAttributes()]] method
   to bypass naming restriction. This method will set all provided attributes without any checks.
+
+You can as well control the dynamic attributes list to be actually saved using [[\yii2tech\ar\dynattribute\DynamicAttributeBehavior::dynamicAttributeSaveFilter]].
+If set to `true` it will exclude any attribute, which is not listed at `dynamicAttributeDefaults` option. You may as
+well specify it as a PHP callback, which will perform some custom filtering. This option allows you to remove obsolete
+dynamic attributes, which existed in the past, but no longer actual.
 
 
 ## Serializer setup <span id="serializer-setup"></span>

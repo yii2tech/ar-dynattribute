@@ -137,4 +137,55 @@ class DynamicAttributeBehaviorTest extends TestCase
         $this->setExpectedException('yii\base\UnknownPropertyException');
         $model->anotherUnexistingProperty = 'foo';
     }
+
+    /**
+     * @depends testInsertDynamicAttributes
+     */
+    public function testSaveDynamicAttributeDefaults()
+    {
+        $model = new Item();
+        $behavior = $model->getDynamicAttributeBehavior();
+        $behavior->saveDynamicAttributeDefaults = false;
+
+        $model->commentCount = 10;
+        $model->save(false);
+        $this->assertEquals('{"commentCount":10}', $model->data);
+
+        $model = new Item();
+        $behavior = $model->getDynamicAttributeBehavior();
+        $behavior->saveDynamicAttributeDefaults = true;
+
+        $model->commentCount = 10;
+        $model->save(false);
+        $this->assertEquals('{"commentCount":10,"hasComment":false}', $model->data);
+    }
+
+    /**
+     * @depends testSetRandomDynamicAttribute
+     * @depends testUpdateDynamicAttributes
+     * @depends testSaveDynamicAttributeDefaults
+     */
+    public function testDynamicAttributeSaveFilter()
+    {
+        $model = new Item();
+        $behavior = $model->getDynamicAttributeBehavior();
+        $behavior->allowRandomDynamicAttribute = true;
+        $behavior->saveDynamicAttributeDefaults = false;
+
+        $model->commentCount = 12;
+        $model->some = 'foo';
+        $behavior->dynamicAttributeSaveFilter = true;
+        $model->save(false);
+        $this->assertEquals('{"commentCount":12}', $model->data);
+
+        $model->some = 'foo';
+        $behavior->dynamicAttributeSaveFilter = function ($attributes) {
+            $attributes['save'] = $attributes['some'];
+            unset($attributes['commentCount']);
+            unset($attributes['some']);
+            return $attributes;
+        };
+        $model->save(false);
+        $this->assertEquals('{"save":"foo"}', $model->data);
+    }
 }

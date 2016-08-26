@@ -79,6 +79,13 @@ class DynamicAttributeBehavior extends Behavior
      */
     public $dynamicAttributeDefaults = [];
     /**
+     * @var boolean whether to save dynamic attribute values, which are equals to the ones, specified via [[dynamicAttributeDefaults]].
+     * By default `true`, which means default values will be saved st [[storageAttribute]].
+     * If set to `false`, which means dynamic attribute, which value exactly matches (`===`) the one specified at [[dynamicAttributeDefaults]],
+     * thus its value will pick up new default value if it is changed.
+     */
+    public $saveDynamicAttributeDefaults = true;
+    /**
      * @var boolean whether set of the attribute with the name, which is not exist neither at current [[dynamicAttributes]]
      * nor at [[$dynamicAttributeDefaults]], is allowed or not.
      * By default this option is disabled, providing the limitation of the dynamic attribute names, which can
@@ -86,6 +93,20 @@ class DynamicAttributeBehavior extends Behavior
      * If enabled dynamic attribute with any name will be allowed to be set.
      */
     public $allowRandomDynamicAttribute = false;
+    /**
+     * @var boolean|callable whether to filter [[dynamicAttributes]] value before save.
+     * Being `null` or `false` means no filtering is performed.
+     * If set to `true` any attribute, which is not present at [[dynamicAttributeDefaults]] will be removed
+     * before saving.
+     * You may setup this option with PHP callback, which accept raw attribute list and should return filtered list:
+     *
+     * ```php
+     * function (array $rawAttributes) {
+     *     return array
+     * }
+     * ```
+     */
+    public $dynamicAttributeSaveFilter;
 
     /**
      * @var array dynamic attributes in format: name => value.
@@ -378,6 +399,23 @@ class DynamicAttributeBehavior extends Behavior
         }
 
         $attributes = $this->getDynamicAttributes();
+
+        if (!$this->saveDynamicAttributeDefaults) {
+            foreach ($this->dynamicAttributeDefaults as $name => $value) {
+                if (array_key_exists($name, $attributes) && $attributes[$name] === $value) {
+                    unset($attributes[$name]);
+                }
+            }
+        }
+
+        if ($this->dynamicAttributeSaveFilter !== null) {
+            if ($this->dynamicAttributeSaveFilter === true) {
+                $attributes = array_intersect_key($attributes, $this->dynamicAttributeDefaults);
+            } else {
+                $attributes = call_user_func($this->dynamicAttributeSaveFilter, $attributes);
+            }
+        }
+
         $data = $this->serializeAttributes($attributes);
 
         $this->owner->{$this->storageAttribute} = $data;
