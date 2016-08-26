@@ -1,7 +1,7 @@
 {
     "name": "yii2tech/ar-dynattribute",
     "description": "Provides dynamic ActiveRecord attributes stored into the single field in serialized state",
-    "keywords": ["yii2", "active", "record", "dynamic", "attributes"],
+    "keywords": ["yii2", "active", "record", "dynamic", "attribute"],
     "type": "yii2-extension",
     "license": "BSD-3-Clause",
     "support": {

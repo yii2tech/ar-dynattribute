@@ -1,5 +1,5 @@
-ActiveRecord Position Extension for Yii2
-========================================
+ActiveRecord Dynamic Attribute Extension for Yii2
+=================================================
 
 This extension provides dynamic ActiveRecord attributes stored into the single field in serialized state.
 
