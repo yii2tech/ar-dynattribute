@@ -155,7 +155,7 @@ class DynamicAttributeBehaviorTest extends TestCase
         $this->assertEquals('some', $model->unexistingProperty);
 
         $behavior->allowRandomDynamicAttribute = false;
-        $this->setExpectedException('yii\base\UnknownPropertyException');
+        $this->expectException('yii\base\UnknownPropertyException');
         $model->anotherUnexistingProperty = 'foo';
     }
 

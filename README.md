@@ -1,5 +1,10 @@
-ActiveRecord Dynamic Attribute Extension for Yii2
-=================================================
+<p align="center">
+    <a href="https://github.com/yii2tech" target="_blank">
+        <img src="https://avatars2.githubusercontent.com/u/12951949" height="100px">
+    </a>
+    <h1 align="center">ActiveRecord Dynamic Attribute Extension for Yii2</h1>
+    <br>
+</p>
 
 This extension provides dynamic ActiveRecord attributes stored into the single field in serialized state.
 
@@ -136,7 +141,7 @@ via [[\yii2tech\ar\dynattribute\DynamicAttributeBehavior::dynamicAttributeDefaul
 Thus once you need extra dynamic attribute for your model you can just update the `dynamicAttributeDefaults`
 list with corresponding value, without necessity to perform any updates on your database.
 
-```
+```php
 class User extends ActiveRecord
 {
     public function behaviors()
