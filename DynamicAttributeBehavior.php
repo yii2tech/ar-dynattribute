@@ -352,7 +352,7 @@ class DynamicAttributeBehavior extends Behavior
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function canGetProperty($name, $checkVars = true)
     {
@@ -364,7 +364,7 @@ class DynamicAttributeBehavior extends Behavior
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function canSetProperty($name, $checkVars = true)
     {
@@ -378,7 +378,7 @@ class DynamicAttributeBehavior extends Behavior
     // Events :
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function events()
     {

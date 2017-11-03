@@ -7,7 +7,7 @@
 
 namespace yii2tech\ar\dynattribute;
 
-use yii\base\Object;
+use yii\base\BaseObject;
 use yii\helpers\Json;
 
 /**
@@ -16,7 +16,7 @@ use yii\helpers\Json;
  * @author Paul Klimov <klimov.paul@gmail.com>
  * @since 1.0
  */
-class JsonSerializer extends Object implements SerializerInterface
+class JsonSerializer extends BaseObject implements SerializerInterface
 {
     /**
      * @var integer the encoding options. For more details please refer to
@@ -27,7 +27,7 @@ class JsonSerializer extends Object implements SerializerInterface
 
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function serialize($value)
     {
@@ -35,7 +35,7 @@ class JsonSerializer extends Object implements SerializerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function unserialize($value)
     {

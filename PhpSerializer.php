@@ -7,7 +7,7 @@
 
 namespace yii2tech\ar\dynattribute;
 
-use yii\base\Object;
+use yii\base\BaseObject;
 
 /**
  * PhpSerializer uses native PHP `serialize()` and `unserialize()` functions for the serialization.
@@ -15,10 +15,10 @@ use yii\base\Object;
  * @author Paul Klimov <klimov.paul@gmail.com>
  * @since 1.0
  */
-class PhpSerializer extends Object implements SerializerInterface
+class PhpSerializer extends BaseObject implements SerializerInterface
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function serialize($value)
     {
@@ -26,7 +26,7 @@ class PhpSerializer extends Object implements SerializerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function unserialize($value)
     {
