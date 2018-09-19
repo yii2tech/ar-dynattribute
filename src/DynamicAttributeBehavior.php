@@ -8,7 +8,7 @@
 namespace yii2tech\ar\dynattribute;
 
 use yii\base\Behavior;
-use yii\base\InvalidParamException;
+use yii\base\InvalidArgumentException;
 use yii\base\UnknownPropertyException;
 use yii\db\BaseActiveRecord;
 use yii\di\Instance;
@@ -166,7 +166,7 @@ class DynamicAttributeBehavior extends Behavior
     {
         $attributes = $this->getDynamicAttributes();
         if (!array_key_exists($name, $attributes)) {
-            throw new InvalidParamException('Getting unknown dynamic attribute: ' . get_class($this->owner) . '::' . $name);
+            throw new InvalidArgumentException('Getting unknown dynamic attribute: ' . get_class($this->owner) . '::$' . $name);
         }
         return $attributes[$name];
     }
@@ -180,7 +180,7 @@ class DynamicAttributeBehavior extends Behavior
     {
         $attributes = $this->getDynamicAttributes();
         if (!$this->allowRandomDynamicAttribute && !array_key_exists($name, $attributes)) {
-            throw new InvalidParamException('Setting unknown dynamic attribute: ' . get_class($this->owner) . '::' . $name);
+            throw new InvalidArgumentException('Setting unknown dynamic attribute: ' . get_class($this->owner) . '::$' . $name);
         }
         $attributes[$name] = $value;
         $this->setDynamicAttributes($attributes);
