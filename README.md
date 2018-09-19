@@ -75,6 +75,10 @@ Its main drawback is inability to use dynamic attributes in condition for the se
 It is acceptable only for the attributes, which are directly set and read for single record only, and never
 used for the filter queries.
 
+> Tip: you may store dynamic attributes into 'JSON' type column instead of plain text, in case you are using modern DBMS
+  with built-in JSON support (e.g. MySQL >= 5.5 or PostgreSQL), however, you will have to deal with possible search
+  condition composition on your own - this extension does not provide explicit support for it.
+
 This extension provides [[\yii2tech\ar\dynattribute\DynamicAttributeBehavior]] ActiveRecord behavior for
 the dynamic attributes support.
 For example:
@@ -214,5 +218,6 @@ The following serializers are available withing this extension:
  - [[\yii2tech\ar\dynattribute\JsonSerializer]] - stores data in JSON format
  - [[\yii2tech\ar\dynattribute\PhpSerializer]] - stores data using PHP `serialize()`/`unserialize()` functions
  - [[\yii2tech\ar\dynattribute\CallbackSerializer]] - stores data via custom serialize PHP callback.
+ - [[\yii2tech\ar\dynattribute\JsonExpressionSerializer]] - handles [[yii\db\JsonExpression]] instances, supporting usage of 'JSON' DB column types.
 
 Please refer to the particular serializer class for more details.
