@@ -6,12 +6,12 @@ use yii\db\ActiveRecord;
 use yii2tech\ar\dynattribute\DynamicAttributeBehavior;
 
 /**
- * @property integer $id
+ * @property int $id
  * @property string $name
  * @property string $data
  *
- * @property boolean $hasComment
- * @property integer $commentCount
+ * @property bool $hasComment
+ * @property int $commentCount
  */
 class Item extends ActiveRecord
 {

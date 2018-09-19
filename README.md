@@ -137,7 +137,7 @@ specify the validation rules for them and obtain their values via web form.
 ## Default values setup <span id="default-values-setup"></span>
 
 As you may note from above example, you can provide a default values for the dynamic attributes
-via [[\yii2tech\ar\dynattribute\DynamicAttributeBehavior::dynamicAttributeDefaults]].
+via [[\yii2tech\ar\dynattribute\DynamicAttributeBehavior::$dynamicAttributeDefaults]].
 Thus once you need extra dynamic attribute for your model you can just update the `dynamicAttributeDefaults`
 list with corresponding value, without necessity to perform any updates on your database.
 
@@ -172,7 +172,7 @@ echo $oldModel->fontColor; // outputs: 'black'
 ```
 
 > Note: you may exclude dynamic attribute, which value equals the default one, from saving disabling
-  [[\yii2tech\ar\dynattribute\DynamicAttributeBehavior::saveDynamicAttributeDefaults]] option.
+  [[\yii2tech\ar\dynattribute\DynamicAttributeBehavior::$saveDynamicAttributeDefaults]] option.
 
 
 ## Restrict dynamic attribute list <span id="restrict-dynamic-attribute-list"></span>
@@ -192,14 +192,14 @@ $newModel->unExistingAttribute = 10; // throws an exception!
 However sometimes there is necessity of storage list of attributes, which can not be predicted.
 For example, saving response fields from some external service.
 In this case you can disable check performed on attribute setter using
-[[\yii2tech\ar\dynattribute\DynamicAttributeBehavior::allowRandomDynamicAttribute]].
+[[\yii2tech\ar\dynattribute\DynamicAttributeBehavior::$allowRandomDynamicAttribute]].
 If it is set to `true` you will be able to setup any dynamic attribute no matter declared or not
 at `dynamicAttributeDefaults`.
 
 > Note: you can also use [[\yii2tech\ar\dynattribute\DynamicAttributeBehavior::setDynamicAttributes()]] method
   to bypass naming restriction. This method will set all provided attributes without any checks.
 
-You can as well control the dynamic attributes list to be actually saved using [[\yii2tech\ar\dynattribute\DynamicAttributeBehavior::dynamicAttributeSaveFilter]].
+You can as well control the dynamic attributes list to be actually saved using [[\yii2tech\ar\dynattribute\DynamicAttributeBehavior::$dynamicAttributeSaveFilter]].
 If set to `true` it will exclude any attribute, which is not listed at `dynamicAttributeDefaults` option. You may as
 well specify it as a PHP callback, which will perform some custom filtering. This option allows you to remove obsolete
 dynamic attributes, which existed in the past, but no longer actual.
@@ -208,7 +208,7 @@ dynamic attributes, which existed in the past, but no longer actual.
 ## Serializer setup <span id="serializer-setup"></span>
 
 By default [[\yii2tech\ar\dynattribute\DynamicAttributeBehavior]] saves the dynamic attribute in JSON
-format. However, you may setup another serializer for them via [[\yii2tech\ar\dynattribute\DynamicAttributeBehavior::serializer]].
+format. However, you may setup another serializer for them via [[\yii2tech\ar\dynattribute\DynamicAttributeBehavior::$serializer]].
 The following serializers are available withing this extension:
 
  - [[\yii2tech\ar\dynattribute\JsonSerializer]] - stores data in JSON format

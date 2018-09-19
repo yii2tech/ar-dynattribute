@@ -53,7 +53,7 @@ use yii\di\Instance;
  * @property BaseActiveRecord $owner
  * @property string|array|SerializerInterface $serializer serializer instance or its configuration.
  * @property array $dynamicAttributes dynamic attributes in format: name => value.
- * @property boolean $isDynamicAttributeInitialized whether the dynamic attributes have been initialized or not.
+ * @property bool $isDynamicAttributeInitialized whether the dynamic attributes have been initialized or not.
  *
  * @author Paul Klimov <klimov.paul@gmail.com>
  * @since 1.0
@@ -79,14 +79,14 @@ class DynamicAttributeBehavior extends Behavior
      */
     public $dynamicAttributeDefaults = [];
     /**
-     * @var boolean whether to save dynamic attribute values, which are equals to the ones, specified via [[dynamicAttributeDefaults]].
+     * @var bool whether to save dynamic attribute values, which are equals to the ones, specified via [[dynamicAttributeDefaults]].
      * By default `true`, which means default values will be saved st [[storageAttribute]].
      * If set to `false`, which means dynamic attribute, which value exactly matches (`===`) the one specified at [[dynamicAttributeDefaults]],
      * thus its value will pick up new default value if it is changed.
      */
     public $saveDynamicAttributeDefaults = true;
     /**
-     * @var boolean whether set of the attribute with the name, which is not exist neither at current [[dynamicAttributes]]
+     * @var bool whether set of the attribute with the name, which is not exist neither at current [[dynamicAttributes]]
      * nor at [[$dynamicAttributeDefaults]], is allowed or not.
      * By default this option is disabled, providing the limitation of the dynamic attribute names, which can
      * be set via virtual property access or [[setDynamicAttribute()]] method.
@@ -94,7 +94,7 @@ class DynamicAttributeBehavior extends Behavior
      */
     public $allowRandomDynamicAttribute = false;
     /**
-     * @var boolean|callable whether to filter [[dynamicAttributes]] value before save.
+     * @var bool|callable whether to filter [[dynamicAttributes]] value before save.
      * Being `null` or `false` means no filtering is performed.
      * If set to `true` any attribute, which is not present at [[dynamicAttributeDefaults]] will be removed
      * before saving.
@@ -234,7 +234,7 @@ class DynamicAttributeBehavior extends Behavior
     }
 
     /**
-     * @return boolean whether the dynamic attributes have been initialized or not.
+     * @return bool whether the dynamic attributes have been initialized or not.
      */
     public function getIsDynamicAttributeInitialized()
     {
@@ -317,7 +317,7 @@ class DynamicAttributeBehavior extends Behavior
      *
      * Note that if the property is not defined, false will be returned.
      * @param string $name the property name or the event name
-     * @return boolean whether the named property is set (not null).
+     * @return bool whether the named property is set (not null).
      * @see http://php.net/manual/en/function.isset.php
      */
     public function __isset($name)
